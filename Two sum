@@ -1,0 +1,23 @@
+https://leetcode.com/problems/two-sum/
+Brute force: target - a[i] = r
+check whether this r exists in remaining array or not 
+time = O(n^2)
+
+sort the array
+Time O(nlogn)
+
+Create a hash map
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length; i++){
+            int diff = target - nums[i];
+            if(map.containsKey(diff)){
+                return new int[]{map.get(diff),i};
+            }
+            map.put(nums[i], i);
+
+        }
+        return null;
+    }
+}
