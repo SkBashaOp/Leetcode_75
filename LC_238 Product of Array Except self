@@ -1,0 +1,47 @@
+prefix * postfix
+O(3n)
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int rp=1;
+        int[] right = new int[n];
+        for(int i=n-1 ; i>=0 ; i--){
+            rp=rp*nums[i];
+            right[i]=rp;
+        }
+        int lp=1;
+        int[] ans = new int[n];
+        int[] left = new int[n];
+        for(int i=0 ; i<n ; i++){
+            lp=lp*nums[i];
+            left[i]=lp;
+        }
+        for(int i = 1 ; i<n-1 ; i++){
+            ans[i] = left[i-1]*right[i+1];
+        }
+        ans[0]=right[1];
+        ans[n-1]=left[n-2];
+        return ans;
+    }    
+}
+
+
+optimal solution:
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int [] results = new int[n];
+        Arrays.fill(results,1);
+        int pre = 1; int post = 1;
+        for(int i = 0 ; i< n ; i++){
+            results[i]=pre;
+            pre=nums[i]*pre;
+        }
+        for(int i = n-1; i>=0;i--){
+            results[i]=results[i]*post;
+            post=nums[i]*post;
+        }
+    return results;
+    }    
+}
